@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Share+Tech+Mono&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap');
+
+:root {
+  --bg-deep:       #0a0a0f;
+  --bg-panel:      #11111a;
+  --bg-card:       #181824;
+  --bg-card-hover: #1e1e2e;
+  --border:        #2a2a3d;
+  --border-bright: #3d3d5c;
+
+  --red-team:      #c0392b;
+  --red-glow:      #e74c3c;
+  --red-dim:       #5c1a14;
+  --blue-team:     #2980b9;
+  --blue-glow:     #3498db;
+  --blue-dim:      #14335c;
+
+  --gold:          #f39c12;
+  --gold-dim:      #7a4d09;
+  --green:         #27ae60;
+  --purple:        #8e44ad;
+
+  --text-primary:  #e8e8f0;
+  --text-secondary:#8888aa;
+  --text-muted:    #44445a;
+
+  --hp-high:       #27ae60;
+  --hp-mid:        #f39c12;
+  --hp-low:        #e74c3c;
+
+  --font-display:  'Cinzel', serif;
+  --font-mono:     'Share Tech Mono', monospace;
+  --font-body:     'Crimson Pro', serif;
+
+  --radius:        4px;
+  --radius-lg:     8px;
+  --transition:    0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Scanline texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0.05em; }
+
+button {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid var(--border-bright);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  transition: all var(--transition);
+}
+
+button:hover:not(:disabled) {
+  background: var(--bg-card-hover);
+  border-color: var(--text-secondary);
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+button.btn-primary {
+  background: var(--red-dim);
+  border-color: var(--red-team);
+  color: #fff;
+}
+button.btn-primary:hover:not(:disabled) {
+  background: var(--red-team);
+  box-shadow: 0 0 16px var(--red-glow);
+}
+
+button.btn-blue {
+  background: var(--blue-dim);
+  border-color: var(--blue-team);
+  color: #fff;
+}
+button.btn-blue:hover:not(:disabled) {
+  background: var(--blue-team);
+  box-shadow: 0 0 16px var(--blue-glow);
+}
+
+button.btn-danger {
+  background: #2a0a0a;
+  border-color: #7a1a1a;
+  color: #ff6666;
+}
+button.btn-danger:hover:not(:disabled) {
+  background: #7a1a1a;
+}
+
+#app {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Target selection pulse (Player vs Bot mode) ── */
+@keyframes target-pulse {
+  0%, 100% { box-shadow: 0 0 14px #00d4aa, 0 0 4px #00d4aa inset; }
+  50%       { box-shadow: 0 0 28px #00d4aa, 0 0 8px #00d4aa inset; }
+}

@@ -1,0 +1,200 @@
+/* ── Simulation Dashboard ─────────────────────────────── */
+#sim-root {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  padding: 16px;
+  gap: 16px;
+}
+
+.sim-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sim-header h1 {
+  font-size: 1.1rem;
+  color: var(--gold);
+  text-shadow: 0 0 20px var(--gold-dim);
+}
+
+.sim-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.speed-control input[type=range] {
+  accent-color: var(--gold);
+  width: 80px;
+}
+
+.sim-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 360px;
+  gap: 16px;
+  overflow: hidden;
+}
+
+/* ── Win Rate Panel ── */
+.win-rate-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.win-rate-panel h2 {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.win-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.win-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.win-bar-track {
+  height: 28px;
+  background: var(--bg-deep);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.win-bar-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+  border-radius: var(--radius);
+}
+
+.win-bar-fill.red { background: linear-gradient(90deg, var(--red-dim), var(--red-glow)); }
+.win-bar-fill.blue { background: linear-gradient(90deg, var(--blue-dim), var(--blue-glow)); }
+
+.game-counter {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--gold);
+  text-shadow: 0 0 30px var(--gold-dim);
+  line-height: 1;
+}
+.game-counter span { font-size: 1rem; color: var(--text-muted); display: block; margin-top: 4px; }
+
+.score-row {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.score-val {
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+.score-val.red { color: var(--red-glow); text-shadow: 0 0 20px var(--red-dim); }
+.score-val.blue { color: var(--blue-glow); text-shadow: 0 0 20px var(--blue-dim); }
+.score-label { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); }
+
+/* ── Teams Live Panel ── */
+.teams-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.teams-panel h2 {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.team-section { display: flex; flex-direction: column; gap: 6px; }
+
+.team-name {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  letter-spacing: 0.1em;
+}
+.team-name.red { background: var(--red-dim); color: var(--red-glow); border-left: 3px solid var(--red-glow); }
+.team-name.blue { background: var(--blue-dim); color: var(--blue-glow); border-left: 3px solid var(--blue-glow); }
+
+/* ── Battle Log ── */
+.log-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.log-panel h2 {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.log-scroll {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-bright) transparent;
+}
+
+.log-entry {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  padding: 2px 4px;
+  border-radius: 2px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.log-entry.damage  { color: #e8a0a0; }
+.log-entry.death   { color: var(--red-glow); background: rgba(192,57,43,0.1); }
+.log-entry.skill   { color: var(--gold); }
+.log-entry.counter { color: var(--purple); }
+.log-entry.block   { color: var(--blue-glow); }
+.log-entry.system  { color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 4px; padding-top: 4px; }
+.log-entry.victory { color: var(--green); font-weight: bold; }

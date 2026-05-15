@@ -1,0 +1,241 @@
+/* ── Player vs Bot UI ─────────────────────────────────── */
+#player-root {
+  display: grid;
+  grid-template-rows: auto 1fr 220px;
+  height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.player-header h1 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  text-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.turn-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-bright);
+  transition: all 0.3s ease;
+}
+.turn-indicator.player-turn {
+  background: var(--red-dim);
+  border-color: var(--red-glow);
+  color: var(--red-glow);
+  box-shadow: 0 0 12px var(--red-dim);
+  animation: pulse-red 1.5s ease-in-out infinite;
+}
+.turn-indicator.enemy-turn {
+  background: var(--blue-dim);
+  border-color: var(--blue-glow);
+  color: var(--blue-glow);
+}
+.turn-indicator.ended {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 12px var(--red-dim); }
+  50%       { box-shadow: 0 0 24px var(--red-glow); }
+}
+
+/* ── Battle Field ── */
+.battle-field {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.team-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.3em;
+}
+
+/* ── Action Panel ── */
+.action-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+  /* Panel height is fixed by the grid row — children must not overflow it */
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── Left side: action label + scrollable buttons ── */
+.action-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.action-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-bright) transparent;
+  padding-right: 4px;   /* room for scrollbar */
+}
+
+.action-buttons button {
+  font-size: 0.7rem;
+  padding: 6px 14px;
+}
+
+.action-log {
+  overflow-y: auto;
+  max-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-bright) transparent;
+}
+
+/* ── Overlay ── */
+.battle-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.overlay-box {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius-lg);
+  padding: 36px 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 480px;
+  max-width: 640px;
+  width: 100%;
+}
+
+.overlay-box h2 {
+  font-size: 2.2rem;
+  letter-spacing: 0.2em;
+}
+.overlay-box h2.victory { color: var(--gold); text-shadow: 0 0 40px var(--gold); }
+.overlay-box h2.defeat  { color: var(--red-glow); text-shadow: 0 0 40px var(--red-dim); }
+
+/* ── Final Action (Cause) Block ── */
+.overlay-cause {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.overlay-cause-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.overlay-cause-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Survivor Summary ── */
+.overlay-summary {
+  display: flex;
+  gap: 16px;
+  text-align: left;
+}
+
+.overlay-summary-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.overlay-summary-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+
+.overlay-summary-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.overlay-summary-hp {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
