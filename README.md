@@ -2,7 +2,7 @@
 
 ## About this project
 
-This project was born out of a personal challenge to push my boundaries as a developer within a strict, time-boxed period from **May 11 to May 16, 2026**.
+This project was born out of a personal challenge to push my boundaries as a developer within a strict, time-boxed period from **May 11 to May 16, 2026**. You can play this game on [itch.io](https://phantomcoding.itch.io/battle-engine).
 
 The core mission of this sprint was to self-assess and elevate my practical skills in **TypeScript** and **Object-Oriented Programming (OOP)**. I chose to build a **Turn-based Battle Game** because it demands a clean, scalable domain model that perfectly tests these concepts.
 
