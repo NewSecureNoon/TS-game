@@ -1,7 +1,7 @@
 import './styles/base.css';
 import './styles/simulation.css';
 import './styles/player.css';
-import { SimulationUI } from './ui/SimulationUI.ts';
+// import { SimulationUI } from './ui/SimulationUI.ts';
 import { PlayerUI } from './ui/PlayerUI.ts';
 
 const app = document.getElementById('app')!;
@@ -43,13 +43,13 @@ function showLanding(): void {
 
   const modeRow = document.createElement('div');
   modeRow.style.cssText = 'display: flex; gap: 32px; align-items: stretch;';
-  modeRow.appendChild(createModeCard(
-    'Simulation',
-    'Run 100 automated battles and watch win-rate analytics update live.',
-    ['Adjustable speed', 'Live HP tracking', 'Win rate chart'],
-    '#f39c12', '#7a4d09',
-    () => loadSimulation()
-  ));
+  // modeRow.appendChild(createModeCard(
+  //   'Simulation',
+  //   'Run 100 automated battles and watch win-rate analytics update live.',
+  //   ['Adjustable speed', 'Live HP tracking', 'Win rate chart'],
+  //   '#f39c12', '#7a4d09',
+  //   () => loadSimulation()
+  // ));
   modeRow.appendChild(createModeCard(
     'Play vs Bot',
     'Control the Red party yourself. Choose attacks and skills each turn.',
@@ -114,15 +114,15 @@ function createModeCard(
   return card;
 }
 
-function loadSimulation(): void {
-  app.innerHTML = '';
-  const backBtn = makeBackBtn();
-  const container = document.createElement('div');
-  container.style.flex = '1';
-  app.appendChild(backBtn);
-  app.appendChild(container);
-  new SimulationUI(container);
-}
+// function loadSimulation(): void {
+//   app.innerHTML = '';
+//   const backBtn = makeBackBtn();
+//   const container = document.createElement('div');
+//   container.style.flex = '1';
+//   app.appendChild(backBtn);
+//   app.appendChild(container);
+//   new SimulationUI(container);
+// }
 
 function loadPlayer(): void {
   app.innerHTML = '';

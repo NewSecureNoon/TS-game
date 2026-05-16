@@ -7,12 +7,14 @@ export class CharacterCard {
   private el: HTMLDivElement;
   private statusEl: HTMLDivElement;
   private nameEl: HTMLSpanElement;
+  private effectEl : HTMLDivElement;
 
   constructor(character: Character) {
     this.character = character;
     this.hpBar = new HpBar();
     this.el = document.createElement('div');
     this.nameEl = document.createElement('span');
+    this.effectEl = document.createElement('div');
     this.statusEl = document.createElement('div');
     this.buildCard();
   }
@@ -52,24 +54,24 @@ export class CharacterCard {
     header.appendChild(roleEl);
 
     // Stats row
-    const stats = document.createElement('div');
-    stats.style.cssText = `
+    // const stats = document.createElement('div');
+    this.statusEl.style.cssText = `
       display: flex; gap: 10px;
       font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: #8888aa;
     `;
-    stats.innerHTML = `
+    this.statusEl.innerHTML = `
       <span title="Attack">⚔ ${c.atk}</span>
       <span title="Defense">🛡 ${c.def}</span>
       <span title="Speed">⚡ ${c.speed}</span>
     `;
 
     // Status effects
-    this.statusEl.style.cssText = 'display: flex; flex-wrap: wrap; gap: 3px; min-height: 16px;';
+    this.effectEl.style.cssText = 'display: flex; flex-wrap: wrap; gap: 3px; min-height: 16px;';
 
     this.el.appendChild(header);
     this.el.appendChild(this.hpBar.render());
-    this.el.appendChild(stats);
     this.el.appendChild(this.statusEl);
+    this.el.appendChild(this.effectEl);
   }
 
   render(): HTMLElement {
@@ -79,6 +81,11 @@ export class CharacterCard {
   update(): void {
     const c = this.character;
     this.hpBar.update(c.hp, c.maxHp);
+    this.statusEl.innerHTML = `
+      <span title="Attack">⚔ ${c.atk}</span>
+      <span title="Defense">🛡 ${c.def}</span>
+      <span title="Speed">⚡ ${c.speed}</span>
+    `;
 
     // Dead state
     if (!c.isAlive) {
@@ -91,7 +98,7 @@ export class CharacterCard {
     }
 
     // Status badges - Buffs and Debuffs
-    this.statusEl.innerHTML = '';
+    this.effectEl.innerHTML = '';
     [...c.buffs, ...c.debuffs].forEach(effect => {
       const badge = document.createElement('span');
       badge.textContent = effect.name;
@@ -103,14 +110,14 @@ export class CharacterCard {
         color: ${isBuff ? '#27ae60' : '#e74c3c'};
         border: 1px solid ${isBuff ? '#27ae60' : '#e74c3c'};
       `;
-      this.statusEl.appendChild(badge);
+      this.effectEl.appendChild(badge);
     });
 
     // Passive abilities - shown in separate section
     if (c.passives.length > 0) {
       const passiveSeparator = document.createElement('div');
       passiveSeparator.style.cssText = 'width: 100%; height: 1px; background: #3d3d5c; margin: 2px 0;';
-      this.statusEl.appendChild(passiveSeparator);
+      this.effectEl.appendChild(passiveSeparator);
 
       c.passives.forEach(passive => {
         const badge = document.createElement('span');
@@ -122,7 +129,7 @@ export class CharacterCard {
           color: #3498db;
           border: 1px solid #3498db;
         `;
-        this.statusEl.appendChild(badge);
+        this.effectEl.appendChild(badge);
       });
     }
   }

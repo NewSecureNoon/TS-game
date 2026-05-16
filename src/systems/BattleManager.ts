@@ -57,6 +57,7 @@ export class BattleManager {
     this.pruneDead();
 
     const activeChar = this.turnOrder.shift();
+    activeChar?.showDetail()
 
     if (!activeChar) {
       this.isBattleEnds = true;

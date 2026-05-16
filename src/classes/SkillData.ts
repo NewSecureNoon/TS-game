@@ -8,7 +8,7 @@ export const createPunishment = () => new ConditionalPassive(
     "สวนกลับทุกครั้งเมื่อโดนโจมตี",
     'atk',
     0,
-    (owner) => true
+    (_) => true
 );
 
 
@@ -17,7 +17,7 @@ export const BerserkFury = new ScalingPassive(
     "เพิ่ม Atk ตามเลือดที่เสียไป (สูงสุด 80%)",
     'atk',
     0.80,
-    (owner) => 1 - (owner.hp / owner.maxHp)
+    (owner) => 1 - (owner.hp / owner.maxHp) 
 );
 
 
@@ -51,7 +51,7 @@ export const ShieldBash = new ConditionalPassive(
     "มีโอกาส 20% ที่จะตีแล้วติด stun",
     null,
     0,
-    (owner) => true
+    (_) => true
 )
 
 
@@ -61,7 +61,9 @@ export const CallReinforcements = new CallReinforcementsSkill(
     3,
     () => {
         // สร้างรายการ Class ที่ต้องการสุ่ม
-        const units = [Knight];
+        const units: Array<new (name: string, controlledBy: string | null) => any> = [
+            Knight as unknown as new (name: string, controlledBy: string | null) => any
+        ];
 
         // สุ่มเลือก 1 Class
         const randomIndex = Math.floor(Math.random() * units.length);

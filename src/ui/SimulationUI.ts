@@ -1,5 +1,4 @@
-import { RedParty, BlueParty, createPartyByName } from '../classes/Party.ts';
-import { MadnessBerserker, WarDrummer, PaladinLeader, Knight } from '../classes/Roles.ts';
+import { createPartyByName } from '../classes/Party.ts';
 import { BattleManager } from '../systems/BattleManager.ts';
 import { CharacterCard } from './components/Charactercard.ts';
 import { BattleLog } from './components/BattleLog.ts';

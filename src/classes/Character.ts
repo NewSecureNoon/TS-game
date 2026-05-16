@@ -47,6 +47,7 @@ export abstract class Character implements IHealable {
         // 1. ดึงโบนัสจาก Passive ส่วนตัวของตัวเอง (เช่น ScalingPassive, ConditionalPassive)
         this.passives.forEach(p => {
             if (p.statModifier === "atk") {
+                console.log(`Team passive: ${p.name} from ${this.name} (${this.role}) to ${this.name} (${this.role}) add ${p.getCurrentBonus(this)} multiplier.`);
                 multiplierBonus += p.getCurrentBonus(this);
             }
         });
@@ -238,7 +239,7 @@ export abstract class Character implements IHealable {
                                     "สวนกลับทุกครั้งเมื่อโดนโจมตี",
                                     'atk',
                                     0,
-                                    (owner) => true
+                                    (_) => true
                                 );
                                 c.passives.push(newPunishment);
                             }

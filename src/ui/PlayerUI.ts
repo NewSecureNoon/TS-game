@@ -62,7 +62,7 @@ export class PlayerUI {
     const playerPartyInfoBtn = document.createElement('button');
     playerPartyInfoBtn.textContent = 'ℹ';
     playerPartyInfoBtn.style.cssText = 'width:18px;height:18px;border-radius:50%;border:1px solid #e74c3c;background:#3a1a1a;color:#e74c3c;font-size:0.65rem;cursor:pointer;padding:0;';
-    playerPartyInfoBtn.addEventListener('mouseenter', (e) => {
+    playerPartyInfoBtn.addEventListener('mouseenter', (_) => {
       const tooltip = document.createElement('div');
       tooltip.style.cssText = `position:absolute;background:#0a0a0f;border:1px solid #3d3d5c;padding:8px;border-radius:4px;font-size:0.65rem;color:#8888aa;max-width:220px;z-index:1000;white-space:normal;top:100%;left:0;margin-top:5px;`;
       tooltip.innerHTML = getPartyDescription(this.selectedPlayerParty);
@@ -98,7 +98,7 @@ export class PlayerUI {
     const botPartyInfoBtn = document.createElement('button');
     botPartyInfoBtn.textContent = 'ℹ';
     botPartyInfoBtn.style.cssText = 'width:18px;height:18px;border-radius:50%;border:1px solid #3498db;background:#1a2a3a;color:#3498db;font-size:0.65rem;cursor:pointer;padding:0;';
-    botPartyInfoBtn.addEventListener('mouseenter', (e) => {
+    botPartyInfoBtn.addEventListener('mouseenter', (_) => {
       const tooltip = document.createElement('div');
       tooltip.style.cssText = `position:absolute;background:#0a0a0f;border:1px solid #3d3d5c;padding:8px;border-radius:4px;font-size:0.65rem;color:#8888aa;max-width:220px;z-index:1000;white-space:normal;top:100%;left:0;margin-top:5px;`;
       tooltip.innerHTML = getPartyDescription(this.selectedBotParty);

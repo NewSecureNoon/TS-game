@@ -1,5 +1,6 @@
 import { Character } from './Character';
-import { BerserkFury, SelfDestruction, ShieldBash, TheComrade, WarSpirit, CallReinforcements, ActivateBlock } from './SkillData';
+import { BerserkFury, SelfDestruction, ShieldBash, TheComrade, WarSpirit, ActivateBlock } from './SkillData';
+import { CallReinforcementsSkill } from './Skill';
 
 
 export class MadnessBerserker extends Character {
@@ -24,7 +25,22 @@ export class PaladinLeader extends Character {
     constructor(name: string, controlledBy: string) {
         super(`${name} - ${controlledBy}`, "Palandin Leader", 350, 100, 100, 15, "Blue", controlledBy);
         this.passives.push(ShieldBash);
-        this.skills.push(CallReinforcements);
+        this.skills.push(new CallReinforcementsSkill(
+            "Call Reinforcement",
+            "เรียกหน่วยสนับสนุนแบบสุ่มเข้าสู่สนามรบ",
+            3,
+            () => {
+                // สร้างรายการ Class ที่ต้องการสุ่ม
+                const units: Array<new (name: string, controlledBy: string | null) => any> = [
+                    Knight as unknown as new (name: string, controlledBy: string | null) => any
+                ];
+
+                // สุ่มเลือก 1 Class
+                const randomIndex = Math.floor(Math.random() * units.length);
+
+                return units[randomIndex]; // คืนค่า Class ที่สุ่มได้ออกไป
+            }
+        ));
     }
 }
 

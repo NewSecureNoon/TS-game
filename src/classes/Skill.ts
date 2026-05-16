@@ -22,7 +22,7 @@ export abstract class PassiveSkill extends Skill {
         this.multiplier = multiplier;
     }
 
-    abstract getCurrentBonus(owner: Character): number;
+    abstract getCurrentBonus(_owner: Character): number;
 
 }
 
@@ -105,7 +105,7 @@ export class TeamPassive extends PassiveSkill {
     }
 
     // สำหรับ TeamPassive โบนัสพื้นฐานคือตัว multiplier เอง
-    getCurrentBonus(owner: Character): number {
+    getCurrentBonus(_owner: Character): number {
         return this.multiplier;
     }
 }
@@ -158,7 +158,7 @@ export class ActivationSkill extends ActiveSkill {
         this.specialBuff = specialBuff;
     }
 
-    execute(user: Character, target: Character): string {
+    execute(user: Character, _target: Character): string {
         const currBuffs: string[] = [];
         user.buffs.forEach(b => currBuffs.push(b.name));
 
